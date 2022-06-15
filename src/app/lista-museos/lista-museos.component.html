@@ -1,0 +1,8 @@
+<div class="listaMuseos">
+    <ul>
+        <li *ngFor="let museo of JSONMuseos; let i = index">
+            Museo: {{ i + 1}}<br>
+            Nombre: {{ museo.museo_nombre }}
+        </li>
+    </ul>
+</div>
