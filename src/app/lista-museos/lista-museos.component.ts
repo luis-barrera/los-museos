@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MuseosService } from '../museos.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-lista-museos',
@@ -8,6 +9,7 @@ import { MuseosService } from '../museos.service';
 })
 export class ListaMuseosComponent implements OnInit {
 
+  displayedColumns: string[] = ['name', 'category', 'location']
   JSONMuseos: any;
 
   constructor(
@@ -22,7 +24,13 @@ export class ListaMuseosComponent implements OnInit {
 
   getJSONMuseos(){
     this.museosService.getMuseos().subscribe((res: any) => {
-      this.JSONMuseos = Object.values(res);
+      this.JSONMuseos = new MatTableDataSource(res);
     });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.JSONMuseos.filter = filterValue.trim().toLowerCase();
+    console.log(this.JSONMuseos);
   }
 }
