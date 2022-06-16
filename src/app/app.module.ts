@@ -1,28 +1,34 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+// Routing
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule, Routes } from '@angular/router';
 
+// Componentes
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ListaMuseosComponent } from './lista-museos/lista-museos.component';
 
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { environment } from "src/environments/environment";
-
+// Servicios
 import { MuseosFirebaseService } from './museos-firebase.service';
 import { MuseosService } from './museos.service';
 
-import { MatTableModule } from '@angular/material/table';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// Módulos para Firebase
+import { AngularFireModule } from '@angular/fire/compat';
+// Módulo de Realtime
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+// Variables de entorno
+import { environment } from "src/environments/environment";
 
-const appRoutes: Routes = [
-  {path:'', component: HomeComponent},  // Home
-]
+// Módulos de Material
+// Tablas
+import { MatTableModule } from '@angular/material/table';
+// Formularios
+import { MatFormFieldModule } from '@angular/material/form-field';
+// Inputs
+import { MatInputModule } from '@angular/material/input';
+// Animaciones
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -33,14 +39,17 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    // Firebase
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    // Módulos de Material
     BrowserAnimationsModule,
     MatTableModule,
     MatFormFieldModule,
     MatInputModule
   ],
   providers: [
+    // Servicios
     MuseosFirebaseService,
     MuseosService
   ],

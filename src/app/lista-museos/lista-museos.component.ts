@@ -9,7 +9,9 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ListaMuseosComponent implements OnInit {
 
+  // Lista de las columnas a mostrar en la tabla Material
   displayedColumns: string[] = ['name', 'category', 'location']
+  // JSON de los Museos
   JSONMuseos: any;
 
   constructor(
@@ -17,20 +19,25 @@ export class ListaMuseosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void { 
+    // Al iniciar/crear el componente obtener los datos
     this.getJSONMuseos();
-    // this.JSONMuseos = this.museosService.getMuseos();
-    // console.log(this.JSONMuseos);
   }
 
+  // Pedir los datos al Servicio
   getJSONMuseos(){
+    // Usar el Observable para obtener datos
     this.museosService.getMuseos().subscribe((res: any) => {
+      // Asignar la respuesta a una variable del tipo necesario para usarlo en
+      // las tablas de Material
       this.JSONMuseos = new MatTableDataSource(res);
     });
   }
 
+  // Función que filtra las entradas del JSON
   applyFilter(event: Event) {
+    // Obtener el string en el campo
     const filterValue = (event.target as HTMLInputElement).value;
+    // Filtrar el JSON con el string
     this.JSONMuseos.filter = filterValue.trim().toLowerCase();
-    console.log(this.JSONMuseos);
   }
 }
